@@ -1,0 +1,40 @@
+{
+  "SPUSBDataType": [
+    {
+      "_name": "USB31Bus",
+      "host_controller": "AppleUSBXHCITR",
+      "_items": [
+        {
+          "_name": "USB3.1 Hub",
+          "vendor_id": "0x05ac",
+          "product_id": "0x0254",
+          "location_id": "0x01100000 / 2",
+          "device_speed": "Up to 10 Gb/s",
+          "manufacturer": "Apple Inc.",
+          "_items": [
+            {
+              "_name": "Logitech Webcam",
+              "vendor_id": "0x046d",
+              "product_id": "0x0892",
+              "serial_num": "WC-99887766",
+              "location_id": "0x01110000 / 5",
+              "device_speed": "Up to 480 Mb/s",
+              "manufacturer": "Logitech",
+              "current_required": "500 mA"
+            }
+          ]
+        },
+        {
+          "_name": "USB Keyboard",
+          "vendor_id": "0x05ac",
+          "product_id": "0x0267",
+          "serial_num": "KB-0001",
+          "location_id": "0x01200000 / 4",
+          "device_speed": "Up to 12 Mb/s",
+          "manufacturer": "Apple Inc.",
+          "current_required": "100 mA"
+        }
+      ]
+    }
+  ]
+}

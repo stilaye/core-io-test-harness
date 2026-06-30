@@ -23,6 +23,7 @@ from .models import (
     BusType,
 )
 from .monitor import DeviceMonitor
+from .device_config import DeviceConfig, ConfiguredDevice, load_device_config
 
 __all__ = [
     "USBDevice",
@@ -32,6 +33,9 @@ __all__ = [
     "USBSpeed",
     "BusType",
     "DeviceMonitor",
+    "DeviceConfig",
+    "ConfiguredDevice",
+    "load_device_config",
 ]
 
 __version__ = "0.1.0"

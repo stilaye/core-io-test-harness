@@ -1,0 +1,82 @@
+# device_config.yaml
+#
+# Device inventory for hardware-in-the-loop Core I/O testing.
+#
+# Pattern mirrors netqual/python_tests/device_config.yaml — DUT, reference
+# devices, and auxiliary devices declared explicitly so tests assert against
+# known expected state rather than "whatever happens to be plugged in."
+#
+# Fill in the `identifiers` fields with real values from your own hardware
+# before running the live tests — run:
+#   system_profiler SPUSBDataType -json
+# and copy the vendor_id / product_id / serial_num for your actual reference
+# USB drive into the section below.
+
+dut:
+  # The Device Under Test is the host Mac itself — Core I/O QE validates
+  # the host's USB/Thunderbolt/PCIe controllers and drivers, not a
+  # separate target device.
+  name: "MacBook Pro (DUT)"
+  role: dut
+  notes: >
+    The machine this harness runs on. All USB/Thunderbolt ports on this
+    machine are within test scope. Update `chip` and `macos_version` below
+    to match your actual hardware before a live demo.
+  chip: "Apple M-series"          # e.g. "Apple M4 Pro"
+  macos_version: "unknown"        # e.g. "15.4 (24E248)"
+
+reference_devices:
+  # Known-good peripherals with expected behavior. Tests assert live
+  # observed state against these expectations — this is what turns
+  # "a USB drive showed up" into "the USB drive negotiated the speed we
+  # expect it to."
+  - name: "Reference USB3 Drive"
+    role: reference
+    bus_type: USB
+    identifiers:
+      vendor_id: null             # e.g. "0x0781" (SanDisk) — fill in from real hardware
+      product_id: null            # e.g. "0x5591"
+      serial_number: null         # most reliable identity key — fill in if known
+      name_pattern: "SanDisk|Samsung|Extreme|SSD"   # fallback fuzzy match by name
+    expected:
+      min_speed: super_speed      # USBSpeed enum value — minimum acceptable negotiated speed
+      max_supported_speed: super_speed_plus
+    notes: >
+      Used for the live hot-plug demo: plug/unplug this drive while
+      DeviceMonitor.run() is polling to produce a real attach/detach event.
+
+  - name: "Reference Thunderbolt Dock"
+    role: reference
+    bus_type: Thunderbolt
+    identifiers:
+      device_id: null
+      vendor_id: null
+      name_pattern: "Dock|Hub|CalDigit|OWC|Caldigit"
+    expected:
+      min_link_speed_gbps: 20.0
+    notes: >
+      Optional — only needed if you have a Thunderbolt dock available for
+      the demo. Not required for the USB-only live test path.
+
+auxiliary_devices:
+  # Devices expected to be present but not under direct test scope —
+  # tracked so the diff engine doesn't misreport them as anomalies.
+  - name: "Apple Keyboard"
+    role: auxiliary
+    bus_type: USB
+    identifiers:
+      vendor_id: "0x05ac"
+      name_pattern: "Keyboard"
+
+  - name: "Apple Trackpad"
+    role: auxiliary
+    bus_type: USB
+    identifiers:
+      vendor_id: "0x05ac"
+      name_pattern: "Trackpad|Magic"
+
+# Poll settings used by the live demo script (live_usb_drive_demo.py)
+live_demo:
+  poll_interval_sec: 1.0
+  duration_sec: 45
+  log_path: "events.jsonl"

@@ -66,8 +66,23 @@ class TestLiveCollection:
         # On any real Mac, at least the internal hub/controller should show up.
         assert len(snapshot.usb_devices) >= 0  # adjust once run on real hardware
 
-    def test_collector_raises_clean_error_off_macos(self):
+
+class TestCollectorErrorHandling:
+    """
+    Verifies CollectorError is raised cleanly when the underlying binary
+    is missing (e.g. running off macOS). Mocks subprocess so it runs
+    anywhere, unlike TestLiveCollection which needs real hardware.
+    """
+
+    def test_collector_raises_clean_error_when_binary_missing(self, monkeypatch):
+        import subprocess
+
         from core_io_monitor.collectors import collect_usb_data
+
+        def fake_run(*args, **kwargs):
+            raise FileNotFoundError("system_profiler")
+
+        monkeypatch.setattr(subprocess, "run", fake_run)
 
         with pytest.raises(CollectorError):
             collect_usb_data()

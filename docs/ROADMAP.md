@@ -1,5 +1,8 @@
 # Roadmap — planned data-source additions
 
+Diagrams: [current pipeline](diagrams/pipeline-current.svg) &middot;
+[planned additions](diagrams/pipeline-planned.svg)
+
 Current state: the live pipeline (`collectors.py` → `parsers.py` →
 `models.py` → `diff_engine.py` → `monitor.py`) is wired end-to-end on top
 of **`system_profiler`** only (`SPUSBDataType` / `SPThunderboltDataType`,

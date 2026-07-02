@@ -1,0 +1,48 @@
+<svg width="680" height="260" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Planned additions to core_io_monitor</title>
+<desc>Three not-yet-built sources — ioreg parsing, IOKit live notifications, and sysdiagnose bundle ingestion — would each extend collectors.py and parsers.py.</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<style>
+.t{font-family:sans-serif;font-size:14px;fill:#2C2C2A}
+.ts{font-family:sans-serif;font-size:12px;fill:#5F5E5A}
+.th{font-family:sans-serif;font-size:14px;font-weight:500;fill:#2C2C2A}
+.leader{stroke:#888780;stroke-width:1;stroke-dasharray:4 3;fill:none}
+.c-gray rect{fill:#F1EFE8;stroke:#5F5E5A}
+.c-gray .th{fill:#444441}
+.c-gray .ts{fill:#5F5E5A}
+</style>
+</defs>
+
+<text class="ts" x="340" y="24" text-anchor="middle">Gray dashed = planned, not yet implemented</text>
+
+<line x1="140" y1="104" x2="260" y2="164" class="leader" marker-end="url(#arrow)"/>
+<line x1="340" y1="104" x2="340" y2="164" class="leader" marker-end="url(#arrow)"/>
+<line x1="540" y1="104" x2="420" y2="164" class="leader" marker-end="url(#arrow)"/>
+
+<g class="c-gray">
+<rect x="50" y="48" width="180" height="56" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/>
+<text class="th" x="140" y="68" text-anchor="middle" dominant-baseline="central">ioreg parsing</text>
+<text class="ts" x="140" y="88" text-anchor="middle" dominant-baseline="central">parse stubbed raw text</text>
+</g>
+
+<g class="c-gray">
+<rect x="250" y="48" width="180" height="56" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/>
+<text class="th" x="340" y="68" text-anchor="middle" dominant-baseline="central">IOKit live notify</text>
+<text class="ts" x="340" y="88" text-anchor="middle" dominant-baseline="central">replace polling loop</text>
+</g>
+
+<g class="c-gray">
+<rect x="450" y="48" width="180" height="56" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/>
+<text class="th" x="540" y="68" text-anchor="middle" dominant-baseline="central">sysdiagnose ingest</text>
+<text class="ts" x="540" y="88" text-anchor="middle" dominant-baseline="central">parse bundle offline</text>
+</g>
+
+<g class="c-gray">
+<rect x="180" y="164" width="320" height="56" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/>
+<text class="th" x="340" y="184" text-anchor="middle" dominant-baseline="central">collectors.py / parsers.py</text>
+<text class="ts" x="340" y="204" text-anchor="middle" dominant-baseline="central">extended to consume new sources</text>
+</g>
+</svg>
